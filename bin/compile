@@ -168,8 +168,7 @@ export CPPPATH="$INCLUDE_PATH"
 
 # install dependencies with npm
 echo "-----> Installing dependencies with npm"
-#run_npm "install --production"
-run_npm "install"
+run_npm "install --production"
 run_npm "rebuild"
 echo "Dependencies installed" | indent
 
@@ -183,7 +182,7 @@ if [ -f $BUILD_DIR/grunt.js ] || [ -f $BUILD_DIR/Gruntfile.js ] || [ -f $BUILD_D
   run_npm "install grunt-cli"
   run_npm "install grunt"
   echo "-----> Found Gruntfile, running grunt heroku:$NODE_ENV task"
-  $BUILD_DIR/node_modules/.bin/grunt heroku:$NODE_ENV
+  $BUILD_DIR/node_modules/.bin/grunt --base $BUILD_DIR heroku:$NODE_ENV
 else
   echo "-----> No Gruntfile (grunt.js, Gruntfile.js, Gruntfile.coffee) found"
 fi
